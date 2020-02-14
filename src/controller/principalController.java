@@ -35,7 +35,17 @@ public class principalController implements Initializable {
 	@FXML
 	private BorderPane m;
 	
+	private Boolean isStop = false;
+	
 	private GridPane juego;
+	
+	public Boolean getIsStop() {
+		return isStop;
+	}
+
+	public void setIsStop(Boolean isStop) {
+		this.isStop = isStop;
+	}
 	
 	public ArrayList<PrimeNumbers> createNumbers(int number) {
 		ArrayList<PrimeNumbers> m = new ArrayList<PrimeNumbers>();
@@ -63,12 +73,18 @@ public class principalController implements Initializable {
 
 		if(principal.isThatPrime(number)) {
 			
+			if(number <= 2) {
+				
+				msj = 1 + "," + number;
+				
+			}else {
+			
 			int numero = (int) m;
 			
 			numero = numero + 1;
 			
 			msj = numero + "," + numero;
-			
+			}
 		}else if(resta != 0.0) {
 			
 			for(int i = 1; i < number;i++) {
@@ -122,6 +138,8 @@ public class principalController implements Initializable {
 	
 	public void performOfButton1(ActionEvent e) {
 		
+		try {
+		
 		if(!n.getText().isEmpty()) {
 			
 			
@@ -135,15 +153,16 @@ public class principalController implements Initializable {
 		int fil = Integer.parseInt(b[0]);
 		int col = Integer.parseInt(b[1]);
 		numbers = new PrimeNumbers[fil][col];
-		
-		
+		juego.setGridLinesVisible(true);
         for(int i = 0; i < col; i++) {
-            ColumnConstraints column = new ColumnConstraints(40);
+            ColumnConstraints column = new ColumnConstraints(50);
+            column.setPrefWidth(36);
             juego.getColumnConstraints().add(column);
         }
 
         for(int i = 0; i < fil; i++) {
-            RowConstraints row = new RowConstraints(40);
+            RowConstraints row = new RowConstraints(50);
+            row.setPrefHeight(36);
             juego.getRowConstraints().add(row);
         }
         
@@ -151,30 +170,29 @@ public class principalController implements Initializable {
         int time = 1000;
         boolean t = false;
         for(int i = 0; i < fil && !t;i++) {
-        	time += 3000;
+        	
         	for(int j = 0; j < col && !t;j++) {
         		
+ 
         		String m1 = Integer.toString(numero);
-        		Label numero1 = new Label(m1);
+        		Label numero1 = new Label(m1 + "");
         		
         		ThreadPaint r = new ThreadPaint(numero1,principal.isThatPrime(numero),time);
         		r.start();
         	
         		numero++;
-        		time += 3000;
-        		juego.add(numero1, j, i);
+        		time += 300;
+        		juego.add(numero1, j, i); 
         		
         		if(numero == high + 1) {
         			t = true;
-        		}
+
+        		} 
         		
         	}
-        	time += 3000;
         }
        
-        
         m.setCenter(juego);
-        
 		
 		}else {
 			Alert gameOver = new Alert(AlertType.INFORMATION);
@@ -183,6 +201,17 @@ public class principalController implements Initializable {
 			gameOver.setContentText(
 					"Por favor ingrese el numero ");
 			gameOver.showAndWait();
+		}
+		
+		}catch(NumberFormatException e1) {
+			
+			Alert gameOver = new Alert(AlertType.INFORMATION);
+			gameOver.setTitle("Alto Ahi!");
+			gameOver.setHeaderText("¡Excepcion Encontrada!");
+			gameOver.setContentText(
+					"Ingrese numeros hptas ");
+			gameOver.showAndWait();
+			
 		}
 	}
 	

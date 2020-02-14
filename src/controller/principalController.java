@@ -9,14 +9,18 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.RowConstraints;
 import model.*;
 
 public class principalController implements Initializable {
 
 	private PrimeNumbers[][] numbers;
+	private PrimeNumbers principal;
 	
 	@FXML
 	private Button buton1;
@@ -46,13 +50,21 @@ public class principalController implements Initializable {
 	public String generateMatrix(int number){
 		
 		String msj = "";
-		ArrayList<PrimeNumbers> array1 = new ArrayList<PrimeNumbers>();
+		ArrayList<PrimeNumbers> array1 = createNumbers(number);
+	
 		
 		double m = Math.sqrt(number);
 		
 		double resta = (m - number);
 		
-		if(resta != 0.0) {
+		
+		if(principal.isThatPrime(number)) {
+			
+			m = m + 1;
+			
+			msj = m + "," + m;
+			
+		}else if(resta != 0.0) {
 			
 			for(int i = 1; i < number;i++) {
 				
@@ -117,6 +129,33 @@ public class principalController implements Initializable {
 		
 		numbers = new PrimeNumbers[fil][col];
 		
+		
+        for(int i = 0; i < col; i++) {
+            ColumnConstraints column = new ColumnConstraints(40);
+            juego.getColumnConstraints().add(column);
+        }
+
+        for(int i = 0; i < fil; i++) {
+            RowConstraints row = new RowConstraints(40);
+            juego.getRowConstraints().add(row);
+        }
+        
+        int numero = 1;
+        
+        for(int i = 0; i < fil;i++) {
+        	
+        	for(int j = 0; j < col;j++) {
+        		
+        		String m1 = Integer.toString(numero);
+        		Label numero1 = new Label(m1);
+        		
+        		juego.add(numero1, j, i);
+        		numero++;
+        		
+        	}
+        	numero = numero + 1;
+        }
+		
 		}else {
 			Alert gameOver = new Alert(AlertType.INFORMATION);
 			gameOver.setTitle("Alto Ahi!");
@@ -130,8 +169,7 @@ public class principalController implements Initializable {
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		// TODO Auto-generated method stub
-		
+		principal = new PrimeNumbers(0);
 	}
 
 }

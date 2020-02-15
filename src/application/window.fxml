@@ -38,8 +38,6 @@
         <Button mnemonicParsing="false" text="Erase grid" />
         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
           <children>
-            <Label text="Time in milisecs: " />
-            <Label text="- " />
           </children>
         </HBox>
       </children>

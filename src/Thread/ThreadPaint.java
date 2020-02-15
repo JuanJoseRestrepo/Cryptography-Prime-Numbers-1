@@ -50,7 +50,7 @@ public class ThreadPaint extends Thread {
 	
 	
 
-}
+	}
 	
 	
-}
+} //end of class

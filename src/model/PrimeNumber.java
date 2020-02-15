@@ -42,10 +42,10 @@ public class PrimeNumber {
         	
         for(int factor = 2; factor*factor <=theIndex; factor++){ 
          
-            // 
+             
             if(goodCollection[factor] == true) 
             { 
-                // Update all multiples of p 
+                
                 for(int multiples = factor*2; multiples <=theIndex; multiples += factor) {
                 	goodCollection[multiples] = false; 
                 }

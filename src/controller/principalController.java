@@ -152,7 +152,7 @@ public class principalController implements Initializable {
 		int col = Integer.parseInt(b[1]);
 		numbers = new PrimeNumber[fil][col];
 		juego.setGridLinesVisible(true);
-
+		boolean[] m2 = principal.sieveOfEratosthenes(high);
         
         int numero = 1;
         int time = 1000;
@@ -171,7 +171,7 @@ public class principalController implements Initializable {
         		numero1.setMinWidth(40);
         		numero1.setMinHeight(40);
         		
-        		ThreadPaint r = new ThreadPaint(numero1,principal.isThatPrime(numero),time);
+        		ThreadPaint r = new ThreadPaint(numero1,m2[numero],time);
         		r.start();
         	
         		numero++;
@@ -211,10 +211,9 @@ public class principalController implements Initializable {
 		}
 	}
 	
-	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		principal = new PrimeNumber(0);
 	}
 
-}
+} //end of class

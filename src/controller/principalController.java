@@ -134,62 +134,58 @@ public class principalController implements Initializable {
 		
 	}
 	
-	
+	public void createGrid(ActionEvent e) {
+		juego = new GridPane();
+		refreshGame(e);
+	}
 	
 	public void performOfButton1(ActionEvent e) {
 		
 		try {
 		
 		if(!n.getText().isEmpty()) {
-			
-			
-		juego = new GridPane();
-		refreshGame(e);
+		createGrid(e);	
 		int high =  Integer.parseInt(n.getText());
 		String msj = generateMatrix(high);
 		String[] b = msj.split(",");
-		System.out.println(b[0]);
-		System.out.println(b[1]);
 		int fil = Integer.parseInt(b[0]);
 		int col = Integer.parseInt(b[1]);
 		numbers = new PrimeNumbers[fil][col];
 		juego.setGridLinesVisible(true);
-        for(int i = 0; i < col; i++) {
-            ColumnConstraints column = new ColumnConstraints(50);
-            column.setPrefWidth(36);
-            juego.getColumnConstraints().add(column);
-        }
 
-        for(int i = 0; i < fil; i++) {
-            RowConstraints row = new RowConstraints(50);
-            row.setPrefHeight(36);
-            juego.getRowConstraints().add(row);
-        }
         
         int numero = 1;
         int time = 1000;
         boolean t = false;
-        for(int i = 0; i < fil && !t;i++) {
-        	
-        	for(int j = 0; j < col && !t;j++) {
-        		
- 
+      
+        int i = 0, j = 0;
+        while (i < col && !t) {
+        	if (j == fil) {
+                i++;
+                j = 0;
+            } else {
+
         		String m1 = Integer.toString(numero);
-        		Label numero1 = new Label(m1 + "");
+        		Label numero1 = new Label(m1 + "  ");
+    		
+        		numero1.setMinWidth(40);
+        		numero1.setMinHeight(40);
         		
         		ThreadPaint r = new ThreadPaint(numero1,principal.isThatPrime(numero),time);
         		r.start();
         	
         		numero++;
         		time += 300;
-        		juego.add(numero1, j, i); 
-        		
+        		juego.add(numero1, i, j);
+                j++;
+
         		if(numero == high + 1) {
         			t = true;
-
         		} 
-        		
-        	}
+     
+            }
+            
+        	
         }
        
         m.setCenter(juego);

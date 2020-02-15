@@ -31,4 +31,29 @@ public class PrimeNumber {
 		return prime;
 		
 	}
-}
+	
+	public boolean[] sieveOfEratosthenes(int theIndex) {
+		
+		boolean[] goodCollection = new boolean[theIndex+1];
+		
+        for(int i=0;i<theIndex;i++) {
+        	goodCollection[i] = true; 
+        }
+        	
+        for(int factor = 2; factor*factor <=theIndex; factor++){ 
+         
+            // 
+            if(goodCollection[factor] == true) 
+            { 
+                // Update all multiples of p 
+                for(int multiples = factor*2; multiples <=theIndex; multiples += factor) {
+                	goodCollection[multiples] = false; 
+                }
+                
+            } 
+        } 
+        
+		return goodCollection; 
+	}
+	
+} //end of class

@@ -20,15 +20,10 @@ public class PrimeNumbers {
 		int contador = 0;
 		boolean prime = false;
 		for(int i = 1; i <= number;i++) {
-			
 			if((number % i) == 0) {
-				
 				contador++;
-				
 			}
-			
 		}
-		
 		if(contador <= 2) {
 			prime = true;
 		}

@@ -1,10 +1,10 @@
 package model;
 
-public class PrimeNumbers {
+public class PrimeNumber {
 
 	private int number;
 	
-	public PrimeNumbers(int number) {
+	public PrimeNumber(int number) {
 		this.number = number;
 	}
 	public int getNumber() {

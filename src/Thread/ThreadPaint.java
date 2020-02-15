@@ -4,7 +4,7 @@ import controller.principalController;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
-import model.PrimeNumbers;
+import model.PrimeNumber;
 
 public class ThreadPaint extends Thread {
 	

@@ -21,8 +21,8 @@ import model.*;
 
 public class principalController implements Initializable {
 
-	private PrimeNumbers[][] numbers;
-	private PrimeNumbers principal;
+	private PrimeNumber[][] numbers;
+	private PrimeNumber principal;
 	
 	@FXML
 	private Button buton1;
@@ -47,12 +47,12 @@ public class principalController implements Initializable {
 		this.isStop = isStop;
 	}
 	
-	public ArrayList<PrimeNumbers> createNumbers(int number) {
-		ArrayList<PrimeNumbers> m = new ArrayList<PrimeNumbers>();
+	public ArrayList<PrimeNumber> createNumbers(int number) {
+		ArrayList<PrimeNumber> m = new ArrayList<PrimeNumber>();
 		
 		for(int i = 1; i < number;i++) {
 			
-			PrimeNumbers x = new PrimeNumbers(i);
+			PrimeNumber x = new PrimeNumber(i);
 			m.add(x);
 			
 		}
@@ -64,7 +64,7 @@ public class principalController implements Initializable {
 	public String generateMatrix(int number){
 		
 		String msj = "";
-		ArrayList<PrimeNumbers> array1 = new ArrayList<PrimeNumbers>();
+		ArrayList<PrimeNumber> array1 = new ArrayList<PrimeNumber>();
 	
 		double m = Math.sqrt(number);
 		int o = (int) m;
@@ -91,7 +91,7 @@ public class principalController implements Initializable {
 				
 				if(number % i == 0) {
 					
-					PrimeNumbers m1 = new PrimeNumbers(i);
+					PrimeNumber m1 = new PrimeNumber(i);
 					array1.add(m1);
 					
 				}
@@ -126,7 +126,7 @@ public class principalController implements Initializable {
 		}catch(NullPointerException e1) {
 			Alert gameOver = new Alert(AlertType.INFORMATION);
 			gameOver.setTitle("Alto Ahi!");
-			gameOver.setHeaderText("¡Excepcion Encontrada!");
+			gameOver.setHeaderText("ï¿½Excepcion Encontrada!");
 			gameOver.setContentText(
 					"Por use una de las tres opciones, para poder jugar");
 			gameOver.showAndWait();
@@ -150,7 +150,7 @@ public class principalController implements Initializable {
 		String[] b = msj.split(",");
 		int fil = Integer.parseInt(b[0]);
 		int col = Integer.parseInt(b[1]);
-		numbers = new PrimeNumbers[fil][col];
+		numbers = new PrimeNumber[fil][col];
 		juego.setGridLinesVisible(true);
 
         
@@ -193,7 +193,7 @@ public class principalController implements Initializable {
 		}else {
 			Alert gameOver = new Alert(AlertType.INFORMATION);
 			gameOver.setTitle("Alto Ahi!");
-			gameOver.setHeaderText("¡Excepcion Encontrada!");
+			gameOver.setHeaderText("ï¿½Excepcion Encontrada!");
 			gameOver.setContentText(
 					"Por favor ingrese el numero ");
 			gameOver.showAndWait();
@@ -203,7 +203,7 @@ public class principalController implements Initializable {
 			
 			Alert gameOver = new Alert(AlertType.INFORMATION);
 			gameOver.setTitle("Alto Ahi!");
-			gameOver.setHeaderText("¡Excepcion Encontrada!");
+			gameOver.setHeaderText("ï¿½Excepcion Encontrada!");
 			gameOver.setContentText(
 					"Ingrese numeros hptas ");
 			gameOver.showAndWait();
@@ -214,7 +214,7 @@ public class principalController implements Initializable {
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		principal = new PrimeNumbers(0);
+		principal = new PrimeNumber(0);
 	}
 
 }

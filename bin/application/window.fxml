@@ -35,7 +35,6 @@
             <Button fx:id="buton3" mnemonicParsing="false" text="Algorithm 3" />
           </children>
         </HBox>
-        <Button mnemonicParsing="false" text="Erase grid" />
         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
           <children>
           </children>

@@ -39,9 +39,10 @@ public class ThreadPaint extends Thread {
 			}
 			
 			if(f == true) {
-				m.setStyle("-fx-border-color: white; -fx-background-color: red;");
-			}else {
+
 				m.setStyle("-fx-border-color: white; -fx-background-color: #1aff1a;");
+			}else {
+				m.setStyle("fx-border-color: white; -fx-background-color: red;");
 			}
 			
 		}

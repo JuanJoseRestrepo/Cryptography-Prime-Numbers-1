@@ -36,7 +36,7 @@ public class PrimeNumber {
 		
 		boolean[] goodCollection = new boolean[theIndex+1];
 		
-        for(int i=0;i<theIndex;i++) {
+        for(int i=0;i<= theIndex;i++) {
         	goodCollection[i] = true; 
         }
         	
@@ -55,5 +55,34 @@ public class PrimeNumber {
         
 		return goodCollection; 
 	}
+	
+	public boolean[] bitwiseSieve(int theIndex){ 
+         
+        boolean[] primeArray = new boolean[theIndex / 2]; 
+        
+        for(int i=0;i<primeArray.length;i++){
+        	primeArray[i] = false; 
+        }
+        
+        for (int composite = 3 ; composite * composite < theIndex; composite += 2){ 
+            
+            if (primeArray[composite / 2] == false) 
+                for (int multiple = composite * composite; multiple < theIndex; multiple += composite * 2) 
+                    primeArray[multiple / 2] = true; 
+        }  
+      
+        boolean[] finalArray = new boolean[theIndex+1]; 
+        finalArray[1]=true;
+        finalArray[2]=true;
+        
+        for (int i = 3; i < theIndex ; i += 2){
+        	if (primeArray[i / 2] == false){
+        		finalArray[i]=true;
+        	}
+                
+        } 
+           
+		return finalArray; 
+    }
 	
 } //end of class

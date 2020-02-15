@@ -153,13 +153,13 @@ public class principalController implements Initializable {
 		numbers = new PrimeNumber[fil][col];
 		juego.setGridLinesVisible(true);
 		boolean[] m2 = principal.sieveOfEratosthenes(high);
-        
+		
         int numero = 1;
         int time = 1000;
         boolean t = false;
       
         int i = 0, j = 0;
-        while (i < col && !t) {
+        while (i <= col && !t) {
         	if (j == fil) {
                 i++;
                 j = 0;
@@ -167,7 +167,7 @@ public class principalController implements Initializable {
 
         		String m1 = Integer.toString(numero);
         		Label numero1 = new Label(m1 + "  ");
-    		
+        		System.out.println(m2[numero]+" ");
         		numero1.setMinWidth(40);
         		numero1.setMinHeight(40);
         		
@@ -179,12 +179,12 @@ public class principalController implements Initializable {
         		juego.add(numero1, i, j);
                 j++;
 
-        		if(numero == high + 1) {
-        			t = true;
-        		} 
-     
             }
-            
+
+    		if(numero > high ) {
+    			t = true;
+    		} 
+             
         	
         }
        

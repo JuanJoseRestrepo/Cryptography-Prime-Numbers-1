@@ -57,26 +57,29 @@ public class PrimeNumber {
 	}
 	
 	public boolean[] bitwiseSieve(int theIndex){ 
-         
-        boolean[] primeArray = new boolean[theIndex / 2]; 
+         		
+		boolean[] primeArray = new boolean[(theIndex / 2) + 1]; 
         
-        for(int i=0;i<primeArray.length;i++){
+        for(int i=0; i<primeArray.length ;i++){
         	primeArray[i] = false; 
         }
         
-        for (int composite = 3 ; composite * composite < theIndex; composite += 2){ 
+        for (int composite = 3 ; composite * composite <= theIndex; composite += 2){ 
             
             if (primeArray[composite / 2] == false) 
-                for (int multiple = composite * composite; multiple < theIndex; multiple += composite * 2) 
-                    primeArray[multiple / 2] = true; 
+                for (int multiple = composite * composite; multiple <= theIndex; multiple += composite * 2) { 
+                    primeArray[multiple / 2] = true;
+                }
         }  
       
         boolean[] finalArray = new boolean[theIndex+1]; 
         finalArray[1]=true;
         finalArray[2]=true;
         
-        for (int i = 3; i < theIndex ; i += 2){
+        for (int i = 3; i < finalArray.length; i += 2){
         	if (primeArray[i / 2] == false){
+        		System.out.println(i);
+        		
         		finalArray[i]=true;
         	}
                 
@@ -84,5 +87,7 @@ public class PrimeNumber {
            
 		return finalArray; 
     }
+	
+	
 	
 } //end of class

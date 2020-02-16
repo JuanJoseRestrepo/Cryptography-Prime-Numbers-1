@@ -37,7 +37,9 @@ public class principalController implements Initializable {
 	
 	private Boolean isStop = false;
 	
-	private GridPane juego;
+	private GridPane matrix;
+	
+	private Master master;
 	
 	public Boolean getIsStop() {
 		return isStop;
@@ -60,152 +62,186 @@ public class principalController implements Initializable {
 		
 		return m;
 	}
-	
-	public String generateMatrix(int number){
-		
-		String msj = "";
-		ArrayList<PrimeNumber> array1 = new ArrayList<PrimeNumber>();
-	
-		double m = Math.sqrt(number);
-		int o = (int) m;
-		double resta = (m - o);
-		
-
-		if(principal.isThatPrime(number)) {
-			
-			if(number <= 2) {
-				
-				msj = 1 + "," + number;
-				
-			}else {
-			
-			int numero = (int) m;
-			
-			numero = numero + 1;
-			
-			msj = numero + "," + numero;
-			}
-		}else if(resta != 0.0) {
-			
-			for(int i = 1; i < number;i++) {
-				
-				if(number % i == 0) {
-					
-					PrimeNumber m1 = new PrimeNumber(i);
-					array1.add(m1);
-					
-				}
-				
-			}
-			
-			for(int i = 0; i < array1.size() - 1;i++) {
-				
-				int num1 = array1.get(i).getNumber();
-				int num2 = array1.get(i+1).getNumber();
-				
-				if(num1 * num2 == number) {
-					
-					msj = num1 + "," + num2;
-					
-				}
-				
-			}
-			
-		}else {
-			int y = (int) m ;
-			msj = y + "," + y;
-		}
-		
-		return msj;
-	}
-	
+	 
 	public void refreshGame(ActionEvent e) {
 		
 		try {
-		juego.getChildren().clear();
+			matrix.getChildren().clear();
 		}catch(NullPointerException e1) {
 			Alert gameOver = new Alert(AlertType.INFORMATION);
-			gameOver.setTitle("Alto Ahi!");
-			gameOver.setHeaderText("�Excepcion Encontrada!");
+			gameOver.setTitle("Stop there!");
+			gameOver.setHeaderText("Exception Found!");
 			gameOver.setContentText(
-					"Por use una de las tres opciones, para poder jugar");
+					"Please type a valid input");
 			gameOver.showAndWait();
 		}
 		
 	}
 	
 	public void createGrid(ActionEvent e) {
-		juego = new GridPane();
+		matrix = new GridPane();
 		refreshGame(e);
 	}
 	
 	public void performOfButton1(ActionEvent e) {
-		
+		 
 		try {
 		
-		if(!n.getText().isEmpty()) {
-		createGrid(e);	
-		int high =  Integer.parseInt(n.getText());
-		String msj = generateMatrix(high);
-		String[] b = msj.split(",");
-		int fil = Integer.parseInt(b[0]);
-		int col = Integer.parseInt(b[1]);
-		numbers = new PrimeNumber[fil][col];
-		juego.setGridLinesVisible(true);
-		boolean[] m2 = principal.sieveOfEratosthenes(high);
+			if(!n.getText().isEmpty()) {
+				
+				createGrid(e);	
+				Master master = new Master();
+				
+				
+				int high =  Integer.parseInt(n.getText());
+				String msj = master.sizeOfMatrix(high);
+				String[] b = msj.split(",");
+				
+				System.out.println(b[0]);
+				System.out.println(b[1]);
+				
+				int row = Integer.parseInt(b[0]);
+				int col = Integer.parseInt(b[1]);
+				numbers = new PrimeNumber[row][col];
+				matrix.setGridLinesVisible(true);
+				
+				boolean[] m2 = master.getEratosthenesSieve(high);
+				
+		        int numero = 1;
+		        int time = 1000;
+		        boolean t = false;
+		      
+		        int i = 0, j = 0;
+		        while (i < col && !t) {
+		        	if (j == row) {
+		                i++;
+		                j = 0;
+		            } else {
 		
-        int numero = 1;
-        int time = 1000;
-        boolean t = false;
-      
-        int i = 0, j = 0;
-        while (i <= col && !t) {
-        	if (j == fil) {
-                i++;
-                j = 0;
-            } else {
-
-        		String m1 = Integer.toString(numero);
-        		Label numero1 = new Label(m1 + "  ");
-        		System.out.println(m2[numero]+" ");
-        		numero1.setMinWidth(40);
-        		numero1.setMinHeight(40);
-        		
-        		ThreadPaint r = new ThreadPaint(numero1,m2[numero],time);
-        		r.start();
-        	
-        		numero++;
-        		time += 300;
-        		juego.add(numero1, i, j);
-                j++;
-
-            }
-
-    		if(numero > high ) {
-    			t = true;
-    		} 
-             
-        	
-        }
-       
-        m.setCenter(juego);
+		        		String m1 = Integer.toString(numero);
+		        		Label numero1 = new Label(m1 + "  ");
 		
-		}else {
-			Alert gameOver = new Alert(AlertType.INFORMATION);
-			gameOver.setTitle("Alto Ahi!");
-			gameOver.setHeaderText("�Excepcion Encontrada!");
-			gameOver.setContentText(
-					"Por favor ingrese el numero ");
-			gameOver.showAndWait();
-		}
+		        		numero1.setMinWidth(40);
+		        		numero1.setMinHeight(40);
+		        		
+		        		ThreadPaint r = new ThreadPaint(numero1,m2[numero],time);
+		        		r.start();
+		        	
+		        		numero++;
+		        		time += 300;
+		        		matrix.add(numero1, j, i);
+		        		j++;
+		
+		         		if(numero == high + 1) {
+		         			t = true;
+		         		}
+		         		
+		            }
+		             
+		        	
+		        }
+		       
+		        m.setCenter(matrix);
+			
+			}else {
+				
+				Alert gameOver = new Alert(AlertType.INFORMATION);
+				gameOver.setTitle("Stop there!");
+				gameOver.setHeaderText("Exception Found!");
+				gameOver.setContentText(
+						"Please type a valid input");
+				gameOver.showAndWait();
+			}
 		
 		}catch(NumberFormatException e1) {
 			
 			Alert gameOver = new Alert(AlertType.INFORMATION);
-			gameOver.setTitle("Alto Ahi!");
-			gameOver.setHeaderText("�Excepcion Encontrada!");
+			gameOver.setTitle("Stop there!");
+			gameOver.setHeaderText("Exception Found!");
 			gameOver.setContentText(
-					"Ingrese numeros hptas ");
+					"Please type a valid input");
+			gameOver.showAndWait();
+			
+		}
+	}
+	
+	public void performOfButon2(ActionEvent e) {
+				
+		try {
+			
+			if(!n.getText().isEmpty()) {
+				
+				createGrid(e);	
+				Master master = new Master();
+				
+				
+				int high =  Integer.parseInt(n.getText());
+				String msj = master.sizeOfMatrix(high);
+				String[] b = msj.split(",");
+				
+				System.out.println(b[0]);
+				System.out.println(b[1]);
+				
+				int row = Integer.parseInt(b[0]);
+				int col = Integer.parseInt(b[1]);
+				numbers = new PrimeNumber[row][col];
+				matrix.setGridLinesVisible(true);
+				
+				boolean[] m2 = master.getBitwiseSieve(high);
+				
+		        int numero = 1;
+		        int time = 1000;
+		        boolean t = false;
+		      
+		        int i = 0, j = 0;
+		        while (i < col && !t) {
+		        	if (j == row) {
+		                i++;
+		                j = 0;
+		            } else {
+		
+		        		String m1 = Integer.toString(numero);
+		        		Label numero1 = new Label(m1 + "  ");
+		
+		        		numero1.setMinWidth(40);
+		        		numero1.setMinHeight(40);
+		        		
+		        		ThreadPaint r = new ThreadPaint(numero1,m2[numero],time);
+		        		r.start();
+		        	
+		        		numero++;
+		        		time += 300;
+		        		matrix.add(numero1, j, i);
+		        		j++;
+		
+		         		if(numero == high + 1) {
+		         			t = true;
+		         		}
+		         		
+		            }
+		             
+		        	
+		        }
+		       
+		        m.setCenter(matrix);
+			
+			}else {
+				
+				Alert gameOver = new Alert(AlertType.INFORMATION);
+				gameOver.setTitle("Stop there!");
+				gameOver.setHeaderText("Exception Found!");
+				gameOver.setContentText(
+						"Please type a valid input");
+				gameOver.showAndWait();
+			}
+		
+		}catch(NumberFormatException e1) {
+			
+			Alert gameOver = new Alert(AlertType.INFORMATION);
+			gameOver.setTitle("Stop there!");
+			gameOver.setHeaderText("Exception Found!");
+			gameOver.setContentText(
+					"Please type a valid input");
 			gameOver.showAndWait();
 			
 		}

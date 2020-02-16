@@ -10,6 +10,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.BorderPane;
@@ -34,6 +35,8 @@ public class principalController implements Initializable {
 	private TextField n;
 	@FXML
 	private BorderPane m;
+	@FXML
+	private ScrollPane scrollPane;
 	
 	private Boolean isStop = false;
 	
@@ -140,6 +143,8 @@ public class principalController implements Initializable {
 		        }
 		       
 		        m.setCenter(matrix);
+		        scrollPane.setMinHeight(720);
+		        scrollPane.setMinWidth(1080);
 			
 			}else {
 				
@@ -219,6 +224,8 @@ public class principalController implements Initializable {
 		        }
 		       
 		        m.setCenter(matrix);
+		        scrollPane.setMinHeight(720);
+		        scrollPane.setMinWidth(1080);
 			
 			}else {
 				
@@ -301,6 +308,8 @@ public class principalController implements Initializable {
 		        }
 		       
 		        m.setCenter(matrix);
+		        scrollPane.setMinHeight(720);
+		        scrollPane.setMinWidth(1080);
 			
 			}else {
 				

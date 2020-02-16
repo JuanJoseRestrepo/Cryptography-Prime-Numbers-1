@@ -97,7 +97,7 @@ public class PrimeNumber {
     }
 	
 	
-	public  boolean[] primesByCapY (int n) {
+	public  boolean[] primesByCapY(int n) {
 		
 		int x = 1;
 		boolean[] res = new boolean[n+2];

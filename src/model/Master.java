@@ -57,6 +57,12 @@ public class Master {
 		
 		return goodCollection;
 	}
+	
+	public boolean[] getPrimesByCapY(int number) {
+		boolean[] goodCollection = primeNumber.primesByCapY(number);
+		
+		return goodCollection;
+	}
 
 
 } //end of class

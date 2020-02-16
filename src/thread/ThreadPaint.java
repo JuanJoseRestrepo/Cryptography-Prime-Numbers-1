@@ -1,4 +1,4 @@
-package Thread;
+package thread;
 
 import controller.principalController;
 import javafx.scene.control.Label;

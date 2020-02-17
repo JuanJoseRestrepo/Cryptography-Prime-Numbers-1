@@ -210,7 +210,7 @@ public class principalController implements Initializable {
 		        		r.start();
 		        	
 		        		numero++;
-		        		time += 300;
+		        		time += 15;
 		        		matrix.add(numero1, j, i);
 		        		j++;
 		
@@ -294,7 +294,7 @@ public class principalController implements Initializable {
 		        		r.start();
 		        	
 		        		numero++;
-		        		time += 300;
+		        		time += 15;
 		        		matrix.add(numero1, j, i);
 		        		j++;
 		

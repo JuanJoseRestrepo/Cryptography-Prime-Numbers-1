@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 
 import model.PrimeNumber;
 
-class PrimeNumberTest {
+class TestPrimeNumber {
 
 	private PrimeNumber p;
 	

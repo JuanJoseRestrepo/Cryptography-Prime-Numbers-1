@@ -86,6 +86,12 @@ public class principalController implements Initializable {
 		refreshGame(e);
 	}
 	
+	public void alert() {
+		Alert a = new Alert(AlertType.ERROR);
+		a.setContentText("Only natural numbers.");
+		a.show();
+	}
+	
 	public void performOfButton1(ActionEvent e) {
 		 
 		try {
@@ -100,6 +106,8 @@ public class principalController implements Initializable {
 				String msj = master.sizeOfMatrix(high);
 				String[] b = msj.split(",");
 				
+				if(high<=0)
+					alert();
 
 				int row = Integer.parseInt(b[0]);
 				int col = Integer.parseInt(b[1]);
@@ -181,6 +189,9 @@ public class principalController implements Initializable {
 				int high =  Integer.parseInt(n.getText());
 				String msj = master.sizeOfMatrix(high);
 				String[] b = msj.split(",");
+				
+				if(high<=0)
+					alert();
 				
 				int row = Integer.parseInt(b[0]);
 				int col = Integer.parseInt(b[1]);
@@ -264,7 +275,8 @@ public class principalController implements Initializable {
 				String msj = master.sizeOfMatrix(high);
 				String[] b = msj.split(",");
 				
-				
+				if(high<=0)
+					alert();
 				
 				int row = Integer.parseInt(b[0]);
 				int col = Integer.parseInt(b[1]);
